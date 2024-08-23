@@ -19,4 +19,25 @@ public class Cadete
         this.telefono = telefono;
         this.listadoPedidos = listadoPedidos;
     }
+
+    public void AgregarPedido(Pedidos pedido)
+    {
+        if (listadoPedidos == null)
+        {
+            listadoPedidos = new List<Pedidos>();
+        }
+
+        listadoPedidos.Add(pedido);
+    }
+
+    public void RemoverPedido(Pedidos pedido)
+    {
+        if (listadoPedidos != null)
+        {
+            listadoPedidos.Remove(pedido);
+        }
+    }
+
+
+
 }
