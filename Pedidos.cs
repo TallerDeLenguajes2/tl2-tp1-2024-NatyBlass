@@ -17,6 +17,23 @@ public class Pedidos
     public Estado EstadoPedido { get => estado; set => estado = value; }
     public DatosCliente Cliente { get => cliente; set => cliente = value; }
 
+    public Pedidos(int nro, string observacion, Estado estado, DatosCliente cliente)
+    {
+        Nro = nro;
+        Observacion = observacion;
+        EstadoPedido = estado;
+        Cliente = cliente;
+    }
+
+    public Pedidos()
+    {
+        Nro = 0;
+        Observacion = "No hay observacion";
+        EstadoPedido = Estado.Preparacion;
+        cliente = new DatosCliente(); 
+    }
+
+
     public void VerDireccionCliente()
     {
         Console.WriteLine($"La direccion del cliente {cliente.Nombre} es {cliente.Direccion}");
@@ -30,8 +47,5 @@ public class Pedidos
         Console.WriteLine($"Referencia: {cliente.RefDireccion}");
         Console.WriteLine($"Telefono: {cliente.Telefono}");
     }
-
-
-
 
 }
