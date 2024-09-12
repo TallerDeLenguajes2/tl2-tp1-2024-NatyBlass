@@ -38,6 +38,24 @@ public class Cadete
         }
     }
 
+    public int ContarPedidos()
+    {
+        int cantPedidos = ListadoPedidos.Count;
+
+        return cantPedidos;
+    }
+
+    public float calcularMontoGanado()
+    {
+        float montoPorPedido = 500;
+        float montoTotal= 0;
+        int cantPedidos = ContarPedidos();
+        
+        montoTotal = cantPedidos * montoPorPedido;
+
+        return montoTotal;
+    }
+
 
 
 }

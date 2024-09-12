@@ -19,18 +19,18 @@ public class Pedidos
 
     public Pedidos(int nro, string observacion, Estado estado, DatosCliente cliente)
     {
-        Nro = nro;
-        Observacion = observacion;
-        EstadoPedido = estado;
-        Cliente = cliente;
+        this.nro = nro;
+        this.observacion = observacion;
+        this.estado = estado;
+        this.cliente = cliente;
     }
 
     public Pedidos()
     {
-        Nro = 0;
-        Observacion = "No hay observacion";
-        EstadoPedido = Estado.Preparacion;
-        cliente = new DatosCliente(); 
+        this.nro = 0;
+        this.observacion = "No hay observacion";
+        this.estado = Estado.Preparacion;
+        this.cliente = new DatosCliente(); 
     }
 
 

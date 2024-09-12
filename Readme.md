@@ -15,7 +15,7 @@
     A la clase Cadete le podría agregar los siguientes métodos:
         VerPedidos();
         AgregarPedido(Pedido pedido);
-        Remover Pedido(Pedido pedido);
+        RemoverPedido(Pedido pedido);
         
 
 ### ● Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos, propiedades y métodos deberían ser públicos y cuáles privados.
