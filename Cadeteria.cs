@@ -41,7 +41,8 @@ public class Cadeteria
     public void EliminarPedido(Cadete cadete, Pedidos pedido)
     {
         cadete.ListadoPedidos.Remove(pedido);
-        pedido.Cliente = null;
+        listaPedidos.Remove(pedido);
+        Console.WriteLine("===PEDIDO ELIMINADO EXITOSAMENTE===");
     }
 
     public void DarDeAltaPedido(string nombreCliente, string direccion, string telefono, string refDireccion, string obs)
@@ -53,7 +54,7 @@ public class Cadeteria
         Console.WriteLine("===PEDIDO CREADO EXITOSAMENTE===");
     }
 
-    public List<Pedidos> Pedidos {get => listaPedidos;}
+    public List<Pedidos> ListaDePedidos {get => listaPedidos;}
 
 
 
