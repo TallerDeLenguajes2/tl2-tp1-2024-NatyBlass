@@ -24,12 +24,37 @@ public class Cadeteria
 
     public void AsignarPedidoACadete(Cadete cadete, Pedidos pedido)
     {
+
+        if (cadete == null)
+        {
+            Console.WriteLine("===ERROR | CADETE NO ENCONTRADO===");
+            return;
+        }
+        else
+        {
+            if (pedido == null)
+            {
+                Console.WriteLine("===ERROR | PEDIDO NO ENCONTRADO===");
+            return;
+            }
+        }
+
         cadete.AgregarPedido(pedido);
+        Console.WriteLine("===PEDIDO ASIGNADO EXITOSAMENTE===");
+
     }
 
     public void CambiarEstadoDelPedido(Pedidos pedido, Pedidos.Estado nuevoEstado)
     {
+        if (pedido == null)
+        {
+            Console.WriteLine("===ERROR | PEDIDO NO ENCONTRADO===");
+            return;
+        }
+
         pedido.EstadoPedido = nuevoEstado;
+        Console.WriteLine($"===EL ESTADO DEL PEDIDO {pedido.Nro} HA SIDO CAMBIADO A {nuevoEstado} ===");
+
     }
 
     public void ReasignarPedido(Cadete cadeteOriginal, Cadete cadeteDestino, Pedidos pedido)
