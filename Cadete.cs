@@ -4,57 +4,23 @@ public class Cadete
     private string nombre;
     private string direccion;
     private string telefono;
-    private List<Pedidos> listadoPedidos;
+    private int cantPedidosRealizados;
+    private List<Pedidos> listadoPedidos = new List<Pedidos>(); //lo instancio acá
 
-    public int Id { get => id; set => id = value; }
-    public string Nombre { get => nombre; set => nombre = value; }
-    public string Telefono { get => telefono; set => telefono = value; }
-    public List<Pedidos> ListadoPedidos { get => listadoPedidos; set => listadoPedidos = value; }
-
-    public Cadete(int id, string nombre, string direccion, string telefono, List<Pedidos> listadoPedidos)
+    public Cadete(int id, string nombre, string direccion, string telefono, int cantPedidosRealizados)
     {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.listadoPedidos = listadoPedidos;
+        this.cantPedidosRealizados = 0;
     }
 
-    public void AgregarPedido(Pedidos pedido)
+    public string DatosDelCadete()
     {
-        if (listadoPedidos == null)
-        {
-            listadoPedidos = new List<Pedidos>();
-        }
-
-        listadoPedidos.Add(pedido);
+        return $"ID: {this.id} - Nombre: {this.nombre} - Direccion: {this.direccion} - Telefono {this.telefono} - Cantidad de Pedidos: {this.cantPedidosRealizados}";
     }
 
-    public void RemoverPedido(Pedidos pedido)
-    {
-        if (listadoPedidos != null)
-        {
-            listadoPedidos.Remove(pedido);
-        }
-    }
-
-    public int ContarPedidos()
-    {
-        int cantPedidos = ListadoPedidos.Count;
-
-        return cantPedidos;
-    }
-
-    public float calcularMontoGanado()
-    {
-        float montoPorPedido = 500;
-        float montoTotal= 0;
-        int cantPedidos = ContarPedidos();
-        
-        montoTotal = cantPedidos * montoPorPedido;
-
-        return montoTotal;
-    }
 
 
 
