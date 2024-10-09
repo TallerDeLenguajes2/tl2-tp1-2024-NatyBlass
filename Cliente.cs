@@ -12,18 +12,10 @@ public class DatosCliente
 
     public DatosCliente(string nombre, string direccion, string telefono, string refDireccion)
     {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.refDireccion = refDireccion;
-    }
-
-    public DatosCliente() 
-    {
-        this.nombre = "Desconocido";
-        this.direccion = "Sin dirección";
-        this.telefono = "Sin teléfono";
-        this.refDireccion = "Sin referencia";
+        this.Nombre = nombre;
+        this.Direccion = direccion;
+        this.Telefono = telefono;
+        this.RefDireccion = refDireccion;
     }
 
 }

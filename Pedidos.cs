@@ -4,7 +4,8 @@ public class Pedidos
     {
         Preparacion,
         EnViaje,
-        Entregado
+        Entregado,
+        Cancelado
     }
 
     private int nro;
@@ -12,11 +13,19 @@ public class Pedidos
     private Estado estado;
     private DatosCliente cliente;
 
-    public Pedidos(string nombre, string direccion, string telefono, string refDireccion)
+    public int Nro { get => nro; set => nro = value; }
+    public string Observacion { get => observacion; set => observacion = value; }
+    public Estado Estado1 { get => estado; set => estado = value; }
+    public DatosCliente Cliente { get => cliente; set => cliente = value; }
+
+    public Pedidos(int nro, string observacion, DatosCliente cliente, Estado estado)
     {
-        this.cliente = new DatosCliente(nombre, direccion, telefono, refDireccion);
+        this.nro = nro;
+        this.observacion = observacion;
+        this.Cliente = cliente;
+        this.Estado1 = estado;
+
     }
 
-    
 
 }
