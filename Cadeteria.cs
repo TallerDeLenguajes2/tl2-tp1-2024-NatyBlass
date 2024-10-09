@@ -47,7 +47,11 @@ public class Cadeteria
         cadAnt.eliminarPedido(pedido);
         cadNuevo.agregarPedido(pedido);
     }
-        
+    
+    public void CargarListaCadete(List<Cadete> cadetes)
+    {
+        this.listadoCadetes = cadetes;
+    }
 
     
 }

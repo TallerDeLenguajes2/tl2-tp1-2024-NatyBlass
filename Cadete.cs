@@ -38,6 +38,7 @@ public class Cadete
     public void cambiarEstadoPedido(int nroPedido, Pedidos.Estado nuevoEstado)
     {
         var pedido = listadoPedidos.FirstOrDefault(p => p.Nro == nroPedido);
+        
         if (pedido != null && pedido.Estado1 != Pedidos.Estado.Entregado)
         {
             pedido.Estado1 = nuevoEstado;
@@ -47,6 +48,8 @@ public class Cadete
             Console.WriteLine("Su pedido no existe o ya fue entregado.");
         }
     }
+
+    
 
 
 

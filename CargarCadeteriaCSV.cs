@@ -1,14 +1,14 @@
-public class CargarCadeteria
+public class CargarDatos
 {
 
     public Cadeteria CargarDatosCadeteria(string nomArchivoCSVCadeteria)
     {
         Cadeteria cadeteria = null;
 
-       string[] lineaCadeteria = File.ReadAllLines(nomArchivoCSVCadeteria);
-       string[] primerLinea = lineaCadeteria[0].Split(',');
-       string[] dato = lineaCadeteria[1].Split(',');
-       cadeteria = new Cadeteria(dato[0], dato[1]); 
+        string[] lineaCadeteria = File.ReadAllLines(nomArchivoCSVCadeteria);
+        string[] primerLinea = lineaCadeteria[0].Split(',');
+        string[] dato = lineaCadeteria[1].Split(',');
+        cadeteria = new Cadeteria(dato[0], dato[1]); 
 
        return cadeteria;
     }
@@ -34,10 +34,6 @@ public class CargarCadeteria
         }
 
         return listaCadetes;
-
     }
-
-
-
 
 }
