@@ -10,7 +10,7 @@ public class CargarDatos
         string[] dato = lineaCadeteria[1].Split(',');
         cadeteria = new Cadeteria(dato[0], dato[1]); 
 
-       return cadeteria;
+        return cadeteria;
     }
 
     public List<Cadete> CargarDatosCadetes(string nomArchivoCSVCadete)

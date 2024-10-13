@@ -27,5 +27,12 @@ public class Pedidos
 
     }
 
+    public void CambiarEstadoDelPedido(Estado nuevoEstado)
+    {
+        this.Estado1 =  nuevoEstado;
+    }
+    
+
+
 
 }
