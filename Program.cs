@@ -43,6 +43,9 @@
                 case 5:
                     MostrarInforme(cadeteria);
                     break;
+                case 6: 
+                    salir = 0;
+                    break;
                 default:
                     Console.WriteLine("Opcion ingresada desconocida");
                     break; 

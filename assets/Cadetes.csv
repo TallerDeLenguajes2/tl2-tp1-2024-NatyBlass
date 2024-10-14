@@ -1,4 +1,4 @@
-Id,Nombre,Direccion,Telefono
-1,Natalia,Jujuy23,3811234567
-2,Marcos,Lavalle600,3511234567
-3,Carolina,BuenosAires30,3971234567
+Id,Nombre,Direccion,Telefono, CantPedidos
+1,Natalia,Jujuy23,3811234567,0
+2,Marcos,Lavalle600,3511234567,0
+3,Carolina,BuenosAires30,3971234567,0
