@@ -143,12 +143,18 @@ public class Cadeteria
             totalGanancia = totalGanancia + ganancia;
         }
 
-        float promPedidos = totalPedidos / (float)ListadoPedidos.Count();
-
         Console.WriteLine($"Total de Pedidos: {totalPedidos}");
         Console.WriteLine($"Total Ganado: {totalGanancia}");
-        Console.WriteLine($"Promedio de pedidos por cadetes: {promPedidos:F2}");
 
+        if (totalPedidos > 0)
+        {
+            float promPedidos = totalPedidos / (float)ListadoPedidos.Count();
+            Console.WriteLine($"Promedio de pedidos por cadetes: {promPedidos:F2}");
+        }
+        else
+        {
+            Console.WriteLine("No hay pedidos realizados");
+        }
         Console.ReadKey();
     }
 

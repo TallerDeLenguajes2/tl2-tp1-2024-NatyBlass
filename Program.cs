@@ -106,7 +106,7 @@
             Console.WriteLine("Ingrese el numero de pedido que desea asignar: ");
             int nroPed = int.Parse(Console.ReadLine());
 
-            var pedAAsignar = pedidosPend.FirstOrDefault(p => p.Nro == nroPed);
+            Pedidos pedAAsignar = pedidosPend.FirstOrDefault(p => p.Nro == nroPed);
 
             if (pedAAsignar == null)
             {
@@ -127,12 +127,14 @@
                 Console.WriteLine("Ingrese el ID del Cadete al que desea Asignarle el pedido: ");
                 int idCadete = int.Parse(Console.ReadLine());
                 
-                var cadAAsignar = cadeteria.ListadoCadetes.FirstOrDefault(c => c.Id == idCadete);
+                Cadete cadAAsignar = cadeteria.ListadoCadetes.FirstOrDefault(c => c.Id == idCadete);
 
                 if(cadAAsignar != null)
                 {
                     cadeteria.AsignarCadeteAPedido(cadAAsignar, pedAAsignar);
                     pedidosPend.Remove(pedAAsignar);
+                    cadeteria.AgregarPedido(pedAAsignar);
+                    
                     Console.WriteLine("El pedido a sido asignado a un cadete.");
                 }
                 else
