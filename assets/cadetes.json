@@ -1,0 +1,20 @@
+[
+    {
+        "Id": 1,
+        "Nombre": "Natalia",
+        "Direccion": "Jujuy23",
+        "Telefono": "3811234567"
+    },
+    {
+        "Id": 2,
+        "Nombre": "Marcos",
+        "Direccion": "Lavalle600",
+        "Telefono": "3511234567"
+    },
+    {
+        "Id": 3,
+        "Nombre": "Carolina",
+        "Direccion": "BuenosAires30",
+        "Telefono": "3971234567"
+    }
+]

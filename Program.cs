@@ -1,15 +1,39 @@
 ﻿public class Program
 {
-
     static List<Pedidos> pedidosPend = new List<Pedidos>();
 
     static void Main(string [] args)
     {
 
-        CargarDatos cargaDeDatos= new CargarDatos();
-        Cadeteria cadeteria = cargaDeDatos.CargarDatosCadeteria("assets/Cadeteria.csv"); // .../.../.../assets/Cadeteria.csv -RUTA PARA DEBUGUEAR-
-        List<Cadete> listaCadetes = cargaDeDatos.CargarDatosCadetes("assets/Cadetes.csv"); // .../.../.../assets/Cadetes.csv -RUTA PARA DEBUGUEAR-
-        cadeteria.CargarListaCadete(listaCadetes);
+        Console.WriteLine("Que Archivos desea usar para cargar los Datos?");
+        Console.WriteLine("1 - CSV");
+        Console.WriteLine("2 - JSON");
+        int opcionCarga = int.Parse(Console.ReadLine());
+
+        AccesoADatos accesoDatos;
+        Cadeteria cadeteria;
+        List<Cadete> listaCadetes = null;
+
+        switch (opcionCarga)
+        {
+
+            case 1: 
+                accesoDatos = new AccesoCSV();
+                cadeteria = accesoDatos.CargarDatosCadeteria("assets/Cadeteria.csv"); // .../.../.../assets/Cadeteria.csv -RUTA PARA DEBUGUEAR-
+                listaCadetes = accesoDatos.CargarDatosCadetes("assets/Cadetes.csv"); // .../.../.../assets/Cadetes.csv -RUTA PARA DEBUGUEAR-     
+                cadeteria.CargarListaCadete(listaCadetes);
+                break;
+
+            case 2:
+                accesoDatos = new AccesoJson();
+                cadeteria = accesoDatos.CargarDatosCadeteria("assets/cadeteria.json");
+                listaCadetes = accesoDatos.CargarDatosCadetes("assets/cadetes.json");
+                cadeteria.CargarListaCadete(listaCadetes);
+                break;
+            default:
+            Console.WriteLine("Opcion Incorrecta");
+                return;
+        }
 
         int salir = 1;
 
@@ -134,7 +158,7 @@
                     cadeteria.AsignarCadeteAPedido(cadAAsignar, pedAAsignar);
                     pedidosPend.Remove(pedAAsignar);
                     cadeteria.AgregarPedido(pedAAsignar);
-                    
+
                     Console.WriteLine("El pedido a sido asignado a un cadete.");
                 }
                 else
