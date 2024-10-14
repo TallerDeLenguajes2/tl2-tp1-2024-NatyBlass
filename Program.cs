@@ -116,7 +116,7 @@
             }
             else
             {
-                Console.WriteLine("Cadetes para Asignar Pedido: ");
+                Console.WriteLine("Cadetes Disponibles: ");
                 foreach(var cadete in cadeteria.ListadoCadetes)
                 {
                     Console.WriteLine("=============================");
@@ -131,7 +131,7 @@
 
                 if(cadAAsignar != null)
                 {
-                    cadeteria.AsignarPedido(cadAAsignar, pedAAsignar);
+                    cadeteria.AsignarCadeteAPedido(cadAAsignar, pedAAsignar);
                     pedidosPend.Remove(pedAAsignar);
                     Console.WriteLine("El pedido a sido asignado a un cadete.");
                 }
@@ -158,24 +158,10 @@
             Console.WriteLine($"{(int)estadoDisp} - {estadoDisp}");
         }
 
-        Console.WriteLine("Ingrese el Estado al que desa cambiar: ");
+        Console.WriteLine("Ingrese el Estado al que desea cambiar: ");
         Pedidos.Estado nuevoEstado = (Pedidos.Estado)int.Parse(Console.ReadLine());
 
-        foreach(var cadete in cadeteria.ListadoCadetes)
-        {
-            var pedido = cadete.ListadoPedidos.FirstOrDefault(p => p.Nro == numPedido);
-            if (pedido != null)
-            {
-                pedido.CambiarEstadoDelPedido(nuevoEstado);
-                Console.WriteLine("El Estado del pedido ha sido actualizado.");
-                return;
-            }
-            else
-            {
-                Console.WriteLine("Pedido No Encontrado.");
-            }
-        }
-
+        cadeteria.CambiarEstadoPedido(numPedido, nuevoEstado);
         Console.WriteLine("Presione cualquier tecla para continuar.");
         Console.ReadKey();
     }
@@ -185,7 +171,16 @@
         Console.WriteLine("==REASIGNAR PEDIDO A OTRO CADETE==");
 
         Console.WriteLine("Ingrese el numero de pedido que desea reasignar: ");
-        int pedAReasignar = int.Parse(Console.ReadLine());
+        int numPedido = int.Parse(Console.ReadLine());
+
+        Pedidos pedAReasignar = cadeteria.ListadoPedidos.FirstOrDefault(p => p.Nro == numPedido);
+        if (pedAReasignar == null || pedAReasignar.Cadete == null)
+        {
+            Console.WriteLine("El pedido no existe o no tiene un cadete asignado.");
+            return;
+        }
+
+        Cadete cadAnterior = pedAReasignar.Cadete;
 
         Console.WriteLine("Listado de Cadetes disponibles");
         foreach(var cadete in cadeteria.ListadoCadetes)
@@ -198,24 +193,12 @@
         Console.WriteLine("Ingrese el ID del cadete al que desea Asignarle el pedido: ");
         int idNuevoCadete = int.Parse(Console.ReadLine());
 
-        Cadete cadeteAnterior = cadeteria.ListadoCadetes.FirstOrDefault(c => c.ListadoPedidos.Any(p => p.Nro == pedAReasignar));
-
-        var nuevoCadete = cadeteria.ListadoCadetes.FirstOrDefault(c => c.Id == idNuevoCadete);
+        Cadete nuevoCadete = cadeteria.ListadoCadetes.FirstOrDefault(c => c.Id == idNuevoCadete);
         
-        if (nuevoCadete != null && cadeteAnterior != null)
+        if (nuevoCadete != null)
         {
-            var pedido = cadeteAnterior.ListadoPedidos.FirstOrDefault(p => p.Nro == pedAReasignar);
-
-            if (pedido != null)
-            {
-                cadeteria.reasignarPedidoCadete(cadeteAnterior, nuevoCadete, pedido);
-                Console.WriteLine("Pedido reasignado correctamente.");
-                return;
-            }
-            else
-            {
-                Console.WriteLine("No se encontró el pedido que desea reasignar.");
-            }
+            cadeteria.reasignarPedidoCadete(cadAnterior, nuevoCadete, pedAReasignar);
+            Console.WriteLine("Pedido reasignado correctamente.");
         }
         else
         {
@@ -227,33 +210,7 @@
 
     static void MostrarInforme(Cadeteria cadeteria)
     {
-        Console.WriteLine("==INFORME DIARIO==");
-
-        var infCadetes = cadeteria.ListadoCadetes.Select(c => new{
-            Cadete = c,
-            CantidadPedidos = c.ListadoPedidos.Count,
-            TotalGanado = c.GananciaDia()
-        }).ToList();
-
-        int totalPedidos = 0;
-        int totalGanancia = 0;
-
-        foreach (var infCadete in infCadetes)
-        {
-            Console.WriteLine($"Cadete: {infCadete.Cadete.Nombre}");
-            Console.WriteLine($"Cantidad de Pedidos Realizados: {infCadete.CantidadPedidos}");
-            Console.WriteLine($"Ganancia del Dia: {infCadete.TotalGanado}");
-
-            totalPedidos = totalPedidos + infCadete.CantidadPedidos;
-            totalGanancia = totalGanancia + infCadete.TotalGanado;
-        }
-
-        float promPedidos = totalPedidos / (int)infCadetes.Count();
-
-        Console.WriteLine($"Total de Pedidos: {totalPedidos}");
-        Console.WriteLine($"Total Ganado: {totalGanancia}");
-        Console.WriteLine($"Promedio de pedidos por cadetes: {promPedidos}");
-
-        Console.ReadKey();
+        cadeteria.MostrarInforme();
     }
+
 }

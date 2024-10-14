@@ -139,15 +139,15 @@ public class Cadeteria
             Console.WriteLine($"Cantidad de Pedidos Realizados: {cantPedidos}");
             Console.WriteLine($"Ganancia del Dia: {ganancia}");
 
-            totalPedidos = totalPedidos + infCadete.CantidadPedidos;
-            totalGanancia = totalGanancia + infCadete.TotalGanado;
+            totalPedidos = totalPedidos + cantPedidos;
+            totalGanancia = totalGanancia + ganancia;
         }
 
-        float promPedidos = totalPedidos / (int)infCadetes.Count();
+        float promPedidos = totalPedidos / (float)ListadoPedidos.Count();
 
         Console.WriteLine($"Total de Pedidos: {totalPedidos}");
         Console.WriteLine($"Total Ganado: {totalGanancia}");
-        Console.WriteLine($"Promedio de pedidos por cadetes: {promPedidos}");
+        Console.WriteLine($"Promedio de pedidos por cadetes: {promPedidos:F2}");
 
         Console.ReadKey();
     }

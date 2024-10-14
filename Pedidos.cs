@@ -29,7 +29,7 @@ public class Pedidos
 
     }
 
-    public void CambiarEstadoDelPedido(Estado nuevoEstado)
+    public void CambiarEstado(Estado nuevoEstado)
     {
         this.Estado1 =  nuevoEstado;
     }
