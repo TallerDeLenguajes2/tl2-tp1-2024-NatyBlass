@@ -6,8 +6,11 @@ public class Cadeteria
     private string nombre;
     private string telefono;
     private List<Cadete> listadoCadetes;
+    private List<Pedidos> listadoPedidos; //Hago el listado de los pedidos
+
     
     public List<Cadete> ListadoCadetes { get => listadoCadetes; private set => listadoCadetes = value; }
+    public List<Pedidos> ListadoPedidos { get => listadoPedidos; set => listadoPedidos = value; }
     public string Nombre { get => nombre; set => nombre = value; }
     public string Telefono { get => telefono; set => telefono = value; }
 
@@ -17,35 +20,87 @@ public class Cadeteria
         this.Nombre = nombre;
         this.Telefono = telefono;
         this.ListadoCadetes = new List<Cadete>();
+        this.ListadoPedidos = new List<Pedidos>();
     }
 
-    public void AsignarPedido(Cadete cadete, Pedidos pedido)
+    public void AsignarCadeteAPedido(Cadete cadete, Pedidos pedido) //Como ahora los pedidos los trata la Cadeteria, decidí que al pedido se le asigne un Cadete y no al revés.
     {
-        cadete.agregarPedido(pedido);
-    }
-
-    public void EliminarCadete(Cadete cadete)
-    {
-        ListadoCadetes.Remove(cadete);
-    }
-
-    public void AgregarCadete(Cadete cadete)
-    {
-        ListadoCadetes.Add(cadete);
-    }
-
-    public void EliminarPedido(Pedidos pedido)
-    {
-        foreach(var cadete in listadoCadetes)
+        if (pedido != null && cadete != null)
         {
-            cadete.eliminarPedido(pedido);
+            pedido.Cadete = cadete; 
+            Console.WriteLine($"El Pedido N° {pedido.Nro} fue asignado al Cadete de ID {cadete.Id} con nombre {cadete.Nombre}");
+        }
+        else
+        {
+            Console.WriteLine("No se pudo asignar un cadete al pedido.");
         }
     }
 
     public void reasignarPedidoCadete(Cadete cadAnt, Cadete cadNuevo, Pedidos pedido)
     {
-        cadAnt.eliminarPedido(pedido);
-        cadNuevo.agregarPedido(pedido);
+        if (cadAnt != null && cadNuevo != null && pedido != null)
+        {
+            pedido.Cadete = cadNuevo;
+            Console.WriteLine($"El Pedido N° {pedido.Nro} se reasigno al Cadete de ID {cadNuevo.Id} con nombre {cadNuevo.Nombre}");
+        }
+        else
+        {
+            Console.WriteLine("No se pudo reasignar el pedido a otro cadete.");
+        }
+    }
+
+    public void EliminarCadete (Cadete cadete)
+    {
+        if (listadoCadetes.Remove(cadete)) // es decir que si se pudo eliminar
+        {
+            Console.WriteLine($"Cadete {cadete.Nombre} fue eliminado.");
+        }
+        else
+        {
+            Console.WriteLine("No se pudo eliminar al cadete.");
+        }
+    }
+
+    public void AgregarPedido(Pedidos pedido) //Ahora agrego un pedido al listado de pedidos.
+    {
+        if (pedido != null)
+        {
+            listadoPedidos.Add(pedido);
+            Console.WriteLine($"Pedido {pedido.Nro} agregado a la lista.");
+        }
+        else
+        {
+            Console.WriteLine("El pedido no se pudo agregar a la lista.");
+        }
+    }
+
+    public void EliminarPedido(Pedidos pedido) //En este caso, ahora el método eliminará un pedido de la lista global de pedidos.
+    {
+        if (listadoPedidos.Remove(pedido))
+        {
+            Console.WriteLine($"El Pedido N° {pedido.Nro} fue eliminado.");
+        }
+        else
+        {
+            Console.WriteLine("No pudo eliminarse el pedido.");
+        }
+    }
+
+    public int JornalACobrar(int idCadete)
+    {
+        var cadete = ListadoCadetes.FirstOrDefault(c => c.Id == idCadete);
+        if(cadete != null)
+        {
+            int pedidosRealizados = ListadoPedidos.Count(p => p.Cadete != null && p.Cadete.Id == idCadete);
+            int total = cadete.GananciaDia(pedidosRealizados);
+
+            return total;
+        }
+        else
+        {
+            Console.WriteLine("No encontramos al cadete para calcular su gananacia.");
+            return 0;
+        }
     }
     
     public void CargarListaCadete(List<Cadete> cadetes)
