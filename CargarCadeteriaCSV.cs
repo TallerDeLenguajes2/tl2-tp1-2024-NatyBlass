@@ -26,8 +26,7 @@ public class CargarDatos
                 int.Parse(dato[0]),
                 dato[1],
                 dato[2],
-                dato[3],
-                int.Parse(dato[4])
+                dato[3]
             );
 
             listaCadetes.Add(cadete);

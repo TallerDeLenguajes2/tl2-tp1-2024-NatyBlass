@@ -108,5 +108,49 @@ public class Cadeteria
         this.listadoCadetes = cadetes;
     }
 
+    public void CambiarEstadoPedido(int nroPed, Pedidos.Estado nuevoEstado)
+    {
+        var pedido = listadoPedidos.FirstOrDefault(p => p.Nro == nroPed);
+
+        if (pedido != null)
+        {
+            pedido.CambiarEstado(nuevoEstado);
+            Console.WriteLine($"Estado del Pedido N° {pedido.Nro} actualizado a {nuevoEstado}");
+        }
+        else
+        {
+            Console.WriteLine("El Pedido no fue encontrado");
+        }
+    }
+
+    public void MostrarInforme()
+    {
+        Console.WriteLine("==INFORME DIARIO==");
+
+        int totalPedidos = 0;
+        int totalGanancia = 0;
+
+        foreach (var cadete in listadoCadetes)
+        {
+            int cantPedidos = listadoPedidos.Count(p => p.Cadete != null && p.Cadete.Id == cadete.Id);
+            int ganancia = cadete.GananciaDia(cantPedidos);
+
+            Console.WriteLine($"Cadete: {cadete.Nombre}");
+            Console.WriteLine($"Cantidad de Pedidos Realizados: {cantPedidos}");
+            Console.WriteLine($"Ganancia del Dia: {ganancia}");
+
+            totalPedidos = totalPedidos + infCadete.CantidadPedidos;
+            totalGanancia = totalGanancia + infCadete.TotalGanado;
+        }
+
+        float promPedidos = totalPedidos / (int)infCadetes.Count();
+
+        Console.WriteLine($"Total de Pedidos: {totalPedidos}");
+        Console.WriteLine($"Total Ganado: {totalGanancia}");
+        Console.WriteLine($"Promedio de pedidos por cadetes: {promPedidos}");
+
+        Console.ReadKey();
+    }
+
     
 }
