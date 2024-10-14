@@ -23,66 +23,76 @@ public class Cadeteria
         this.ListadoPedidos = new List<Pedidos>();
     }
 
-    public void AsignarCadeteAPedido(Cadete cadete, Pedidos pedido) //Como ahora los pedidos los trata la Cadeteria, decidí que al pedido se le asigne un Cadete y no al revés.
+    public bool AsignarCadeteAPedido(Cadete cadete, Pedidos pedido) //Como ahora los pedidos los trata la Cadeteria, decidí que al pedido se le asigne un Cadete y no al revés.
     {
         if (pedido != null && cadete != null)
         {
             pedido.Cadete = cadete; 
             Console.WriteLine($"El Pedido N° {pedido.Nro} fue asignado al Cadete de ID {cadete.Id} con nombre {cadete.Nombre}");
+            return true;
         }
         else
         {
-            Console.WriteLine("No se pudo asignar un cadete al pedido.");
+            //Console.WriteLine("No se pudo asignar un cadete al pedido.");
+            return false;
         }
     }
 
-    public void reasignarPedidoCadete(Cadete cadAnt, Cadete cadNuevo, Pedidos pedido)
+    public bool reasignarPedidoCadete(Cadete cadAnt, Cadete cadNuevo, Pedidos pedido)
     {
         if (cadAnt != null && cadNuevo != null && pedido != null)
         {
             pedido.Cadete = cadNuevo;
             Console.WriteLine($"El Pedido N° {pedido.Nro} se reasigno al Cadete de ID {cadNuevo.Id} con nombre {cadNuevo.Nombre}");
+            return true;
         }
         else
         {
-            Console.WriteLine("No se pudo reasignar el pedido a otro cadete.");
+            //Console.WriteLine("No se pudo reasignar el pedido a otro cadete.");
+            return false;
         }
     }
 
-    public void EliminarCadete (Cadete cadete)
+    public bool EliminarCadete (Cadete cadete)
     {
         if (listadoCadetes.Remove(cadete)) // es decir que si se pudo eliminar
         {
             Console.WriteLine($"Cadete {cadete.Nombre} fue eliminado.");
+            return true;
         }
         else
         {
-            Console.WriteLine("No se pudo eliminar al cadete.");
+            //Console.WriteLine("No se pudo eliminar al cadete.");
+            return false;
         }
     }
 
-    public void AgregarPedido(Pedidos pedido) //Ahora agrego un pedido al listado de pedidos.
+    public bool AgregarPedido(Pedidos pedido) //Ahora agrego un pedido al listado de pedidos.
     {
         if (pedido != null)
         {
             listadoPedidos.Add(pedido);
             Console.WriteLine($"Pedido {pedido.Nro} agregado a la lista.");
+            return true;
         }
         else
         {
-            Console.WriteLine("El pedido no se pudo agregar a la lista.");
+            //Console.WriteLine("El pedido no se pudo agregar a la lista.");
+            return false;
         }
     }
 
-    public void EliminarPedido(Pedidos pedido) //En este caso, ahora el método eliminará un pedido de la lista global de pedidos.
+    public bool EliminarPedido(Pedidos pedido) //En este caso, ahora el método eliminará un pedido de la lista global de pedidos.
     {
         if (listadoPedidos.Remove(pedido))
         {
             Console.WriteLine($"El Pedido N° {pedido.Nro} fue eliminado.");
+            return true;
         }
         else
         {
-            Console.WriteLine("No pudo eliminarse el pedido.");
+            //Console.WriteLine("No pudo eliminarse el pedido.");
+            return false;
         }
     }
 
@@ -98,7 +108,7 @@ public class Cadeteria
         }
         else
         {
-            Console.WriteLine("No encontramos al cadete para calcular su gananacia.");
+            //Console.WriteLine("No encontramos al cadete para calcular su gananacia.");
             return 0;
         }
     }
@@ -108,7 +118,7 @@ public class Cadeteria
         this.listadoCadetes = cadetes;
     }
 
-    public void CambiarEstadoPedido(int nroPed, Pedidos.Estado nuevoEstado)
+    public bool CambiarEstadoPedido(int nroPed, Pedidos.Estado nuevoEstado)
     {
         var pedido = listadoPedidos.FirstOrDefault(p => p.Nro == nroPed);
 
@@ -116,10 +126,12 @@ public class Cadeteria
         {
             pedido.CambiarEstado(nuevoEstado);
             Console.WriteLine($"Estado del Pedido N° {pedido.Nro} actualizado a {nuevoEstado}");
+            return true;
         }
         else
         {
-            Console.WriteLine("El Pedido no fue encontrado");
+            //Console.WriteLine("El Pedido no fue encontrado");
+            return false;
         }
     }
 

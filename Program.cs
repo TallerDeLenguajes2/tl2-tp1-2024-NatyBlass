@@ -102,9 +102,15 @@
         DatosCliente cliente = new DatosCliente(nombreCliente,direccionCliente, telefonoCliente, datosReferencia);
         Pedidos pedido = new Pedidos(numPedido, obs, cliente, Pedidos.Estado.Preparacion);
 
-        pedidosPend.Add(pedido);
-
-        Console.WriteLine("El Pedido fue creado y dado de alta.");
+        if (pedidosPend != null)
+        {
+            pedidosPend.Add(pedido);
+            Console.WriteLine("El Pedido fue creado y dado de alta.");
+        }
+        else
+        {
+            Console.WriteLine("El pedido no fue creado correctamente.");
+        }
     }
 
     static void AsignarPedido(Cadeteria cadeteria)
